@@ -1,0 +1,21 @@
+# Python (Django)
+__pycache__/
+*.pyc
+venv/
+*.log
+
+# Node.js (NestJS)
+node_modules/
+dist/
+
+# Java (Spring Boot)
+target/
+.idea/
+*.iml
+
+# Configuración y secretos
+.env
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db
