@@ -1,0 +1,32 @@
+# Entorno virtual (no lo necesitamos en Docker)
+venv/
+env/
+.venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Base de datos local (SQLite si tuvieras)
+*.sqlite3
+db.sqlite3
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.iml
+
+# Git
+.git/
+.gitignore
+
+# Documentación local
+*.md
+docs/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
