@@ -1,0 +1,1 @@
+export * from './clinical-records-service.interface';
