@@ -40,7 +40,7 @@ export class CreatePatientDto {
     @ApiProperty({
         description: 'Género del paciente',
         example: 'M',
-        enum: ['M', 'F', 'Otro'],
+        enum: ['M', 'F'],
     })
     @IsString()
     @IsNotEmpty()
