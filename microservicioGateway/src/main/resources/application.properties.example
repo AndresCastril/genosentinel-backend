@@ -1,0 +1,9 @@
+spring.application.name=genomeBank
+spring.datasource.url=spring.datasource.url
+spring.datasource.username=spring.datasource.username
+spring.datasource.password=spring.datasource.password
+server.servlet.context-path=server.servlet.context-path
+spring.jpa.show-sql=spring.jpa.show-sql
+# JWT config
+jwt.secret=jwt.secret
+jwt.exp-min=jwt.exp-min
