@@ -16,17 +16,19 @@ class PatientVariantReportService(IPatientVariantReportService):
         self.variant_service = GeneticVariantService()
 
     def get_all_reports(self):
-        return PatientVariantReport.objects.all()
+
+        return PatientVariantReport.objects.select_related('variant__gene').all()
 
     def get_report_by_id(self, report_id):
         try:
-            return PatientVariantReport.objects.get(id=report_id)
+            # Cargar relaciones variant y gene
+            return PatientVariantReport.objects.select_related('variant__gene').get(id=report_id)
         except PatientVariantReport.DoesNotExist:
             raise PatientVariantReportNotFoundException()
 
     def get_reports_by_patient(self, patient_id):
-        # Filtrar reportes por paciente
-        return PatientVariantReport.objects.filter(patient_id=patient_id)
+        # IMPORTANTE: Cargar relaciones variant y gene
+        return PatientVariantReport.objects.select_related('variant__gene').filter(patient_id=patient_id)
 
     def create_report(self, report_data):
         # Validar datos
@@ -46,10 +48,14 @@ class PatientVariantReportService(IPatientVariantReportService):
         # Crear reporte
         report = PatientVariantReport(**report_data)
         report.save()
+
+        # IMPORTANTE: Recargar con relaciones
+        report = PatientVariantReport.objects.select_related('variant__gene').get(id=report.id)
+
         return report
 
     def update_report(self, report_id, report_data):
-        # Buscar reporte
+        # Buscar reporte (con relaciones)
         report = self.get_report_by_id(report_id)
 
         # Validar datos
@@ -73,6 +79,9 @@ class PatientVariantReportService(IPatientVariantReportService):
         report.detection_date = report_data.get('detection_date', report.detection_date)
         report.allele_frequency = report_data.get('allele_frequency', report.allele_frequency)
         report.save()
+
+        # IMPORTANTE: Recargar con relaciones
+        report = PatientVariantReport.objects.select_related('variant__gene').get(id=report.id)
 
         return report
 

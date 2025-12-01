@@ -90,20 +90,6 @@
         <!-- Dependencia para hacer uso de WebClient -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web
-                flux</artifactId>
-        </dependency>
-        <!-- Dependencia para implementar Swagger -->
-        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webflux-ui -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.6.0</version> <!-- Usar la versión más reciente compatible con tu SB -->
-        </dependency>
-
-        <!-- Dependencia para hacer uso de WebClient -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <!-- Dependencia para implementar Swagger -->
@@ -113,6 +99,7 @@
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
             <version>2.6.0</version> <!-- Usar la versión más reciente compatible con tu SB -->
         </dependency>
+
 
 	</dependencies>
 

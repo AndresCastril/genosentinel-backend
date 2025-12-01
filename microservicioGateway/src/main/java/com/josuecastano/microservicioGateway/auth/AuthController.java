@@ -100,6 +100,8 @@ public class AuthController {
             Rol rol = rolRepo.findByRoleName(roleName).orElseGet(() -> {
                 Rol newRol = new Rol();
                 newRol.setRoleName(roleName);
+                newRol.setCreatedAt(LocalDateTime.now());
+                newRol.setUpdatedAt(LocalDateTime.now());
                 return rolRepo.save(newRol);
             });
             rolEntities.add(rol);

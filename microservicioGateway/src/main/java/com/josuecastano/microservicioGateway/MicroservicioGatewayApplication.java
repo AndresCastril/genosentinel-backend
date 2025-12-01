@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MicroservicioGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicioGatewayApplication.class, args);
+        SpringApplication.run(MicroservicioGatewayApplication.class, args);
 	}
 
 }

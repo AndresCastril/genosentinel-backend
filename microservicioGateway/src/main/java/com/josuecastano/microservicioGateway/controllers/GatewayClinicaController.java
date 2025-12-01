@@ -9,23 +9,22 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 import java.util.*;
 
 @RestController
-@RequestMapping("/gatewayGenomica")
-public class GatewayGenomicaController {
+@RequestMapping("/gatewayClinica")
+public class GatewayClinicaController {
 
-    private final GatewayGenomicaService gatewayGenomicaService;
+    private final GatewayGenomicaService gatewayService;
 
-    public GatewayGenomicaController(GatewayGenomicaService gatewayGenomicaService) {
-        this.gatewayGenomicaService = gatewayGenomicaService;
+    public GatewayClinicaController(GatewayGenomicaService gatewayService) {
+        this.gatewayService = gatewayService;
     }
 
     @Operation(
-            summary = "Gateway dinámico Genómica",
-            description = "Redirige cualquier solicitud hacia el microservicio Genómica"
+            summary = "Gateway dinámico Clínica",
+            description = "Redirige cualquier solicitud hacia el microservicio Clínica (NestJS)"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Petición procesada correctamente"),
@@ -44,13 +43,13 @@ public class GatewayGenomicaController {
         // 1. Obtener método
         HttpMethod method = HttpMethod.valueOf(request.getMethod());
 
-        // 2. Resolver ruta destino
+        // 2. Resolver ruta destino - NestJS corre en puerto 3000
         String pathOriginal = request.getRequestURI();
-        String dynamicPath = pathOriginal.replaceFirst("/gateway/gatewayGenomica/?", "");
-        String urlDestino = "http://localhost:8000/" + dynamicPath;
+        String dynamicPath = pathOriginal.replaceFirst("/gateway/gatewayClinica/?", "");
+        String urlDestino = "http://localhost:3000/" + dynamicPath;
 
-        // 3. Ejecutar petición (síncrona)
-        String response = gatewayGenomicaService.ejecutarPeticion(
+        // 3. Ejecutar petición
+        String response = gatewayService.ejecutarPeticion(
                 method,
                 urlDestino,
                 body
