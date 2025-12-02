@@ -3,15 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePatientDto {
     @ApiProperty({
-        description: 'ID del paciente (UUID)',
-        example: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    })
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(36)
-    id: string;
-
-    @ApiProperty({
         description: 'Nombre del paciente',
         example: 'Juan',
     })

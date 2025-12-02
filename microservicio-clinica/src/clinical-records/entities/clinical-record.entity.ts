@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Patient } from '../../patients/entities/patient.entity';
 import { TumorType } from '../../tumor-types/entities/tumor-type.entity';
 //
 @Entity('clinical_records')
 export class ClinicalRecord {
-    @PrimaryColumn({ type: 'varchar', length: 36 })
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column({ name: 'patient_id', type: 'varchar', length: 36 })

@@ -3,15 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 //
 export class CreateClinicalRecordDto {
     @ApiProperty({
-        description: 'ID de la historia clínica (UUID)',
-        example: 'record-001',
-    })
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(36)
-    id: string;
-
-    @ApiProperty({
         description: 'ID del paciente',
         example: 'patient-001',
     })

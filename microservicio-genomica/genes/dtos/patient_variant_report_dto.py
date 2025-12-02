@@ -9,7 +9,11 @@ class PatientVariantReportDTO:
         self.gene_symbol = report.variant.gene.symbol
         self.chromosome = report.variant.chromosome
         self.position = report.variant.position
-        self.detection_date = report.detection_date.isoformat()
+        # Manejar si es date o string
+        if hasattr(report.detection_date, 'isoformat'):
+            self.detection_date = report.detection_date.isoformat()
+        else:
+            self.detection_date = report.detection_date
         self.allele_frequency = float(report.allele_frequency)
 
     def to_dict(self):
