@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clinica-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clinica
+  template:
+    metadata:
+      labels:
+        app: clinica
+    spec:
+      containers:
+        - name: clinica
+          image: microservicio-clinica:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_DATABASE
+              value: "genosentinel"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_ROOT_PASSWORD

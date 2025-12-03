@@ -14,7 +14,7 @@ class Gene(models.Model):
 
     class Meta:
         db_table = 'genes'
-        managed = False
+        managed = True
 
     def __str__(self):
         return self.symbol
@@ -36,7 +36,7 @@ class GeneticVariant(models.Model):
 
     class Meta:
         db_table = 'genetic_variants'
-        managed = False
+        managed = True
 
     def __str__(self):
         return f"{self.gene.symbol} - {self.chromosome}:{self.position}"
@@ -56,7 +56,7 @@ class PatientVariantReport(models.Model):
 
     class Meta:
         db_table = 'patient_variant_reports'
-        managed = False
+        managed = True
 
     def __str__(self):
         return f"Patient {self.patient_id} - Variant {self.variant.id}"
