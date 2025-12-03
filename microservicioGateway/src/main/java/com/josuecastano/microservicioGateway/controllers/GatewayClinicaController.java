@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,9 @@ import java.util.*;
 public class GatewayClinicaController {
 
     private final GatewayGenomicaService gatewayService;
+
+    @Value("${CLINICA_SERVICE_URL:http://localhost:3000}")
+    private String clinicaServiceUrl;
 
     public GatewayClinicaController(GatewayGenomicaService gatewayService) {
         this.gatewayService = gatewayService;
@@ -43,10 +47,10 @@ public class GatewayClinicaController {
         // 1. Obtener método
         HttpMethod method = HttpMethod.valueOf(request.getMethod());
 
-        // 2. Resolver ruta destino - NestJS corre en puerto 3000
+        // 2. Resolver ruta destino - Usa variable de entorno
         String pathOriginal = request.getRequestURI();
         String dynamicPath = pathOriginal.replaceFirst("/gateway/gatewayClinica/?", "");
-        String urlDestino = "http://localhost:3000/" + dynamicPath;
+        String urlDestino = clinicaServiceUrl + "/" + dynamicPath;
 
         // 3. Ejecutar petición
         String response = gatewayService.ejecutarPeticion(

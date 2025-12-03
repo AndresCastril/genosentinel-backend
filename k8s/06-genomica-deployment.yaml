@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genomica-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: genomica
+  template:
+    metadata:
+      labels:
+        app: genomica
+    spec:
+      containers:
+        - name: genomica
+          image: microservicio-genomica:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_NAME
+              value: "genosentinel"
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_ROOT_PASSWORD

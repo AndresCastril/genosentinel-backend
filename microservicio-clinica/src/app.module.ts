@@ -24,7 +24,7 @@ import { ClinicalRecordsModule } from './clinical-records/clinical-records.modul
             password: process.env.DB_PASSWORD,
             database: process.env.DB_DATABASE,
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            synchronize: false, // IMPORTANTE: false en producción
+            synchronize: true,
             logging: process.env.NODE_ENV === 'development',
         }),
 

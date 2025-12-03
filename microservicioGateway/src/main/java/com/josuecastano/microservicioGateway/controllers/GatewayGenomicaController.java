@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +19,9 @@ import java.util.*;
 public class GatewayGenomicaController {
 
     private final GatewayGenomicaService gatewayGenomicaService;
+
+    @Value("${GENOMICA_SERVICE_URL:http://localhost:8000}")
+    private String genomicaServiceUrl;
 
     public GatewayGenomicaController(GatewayGenomicaService gatewayGenomicaService) {
         this.gatewayGenomicaService = gatewayGenomicaService;
@@ -44,10 +48,10 @@ public class GatewayGenomicaController {
         // 1. Obtener método
         HttpMethod method = HttpMethod.valueOf(request.getMethod());
 
-        // 2. Resolver ruta destino
+        // 2. Resolver ruta destino - Usa variable de entorno
         String pathOriginal = request.getRequestURI();
         String dynamicPath = pathOriginal.replaceFirst("/gateway/gatewayGenomica/?", "");
-        String urlDestino = "http://localhost:8000/" + dynamicPath;
+        String urlDestino = genomicaServiceUrl + "/" + dynamicPath;
 
         // 3. Ejecutar petición (síncrona)
         String response = gatewayGenomicaService.ejecutarPeticion(

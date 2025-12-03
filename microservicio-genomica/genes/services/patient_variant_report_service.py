@@ -40,7 +40,7 @@ class PatientVariantReportService(IPatientVariantReportService):
         variant_id = report_data.get('variant_id')
         self.variant_service.get_variant_by_id(variant_id)
 
-        # Validación extra de allele frequency (por si acaso)
+        # Validación extra de allele
         allele_freq = report_data.get('allele_frequency')
         if allele_freq < 0 or allele_freq > 1:
             raise InvalidAlleleFrequencyException()
